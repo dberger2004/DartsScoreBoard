@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Darts Scoreboard</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <div id="overlay">
+    <div class="header">
+      <div id="header-input">
+        <input id="inp-sets" type="number" min="1" placeholder="Sets" />
+        <input id="inp-legs" type="number" min="1" placeholder="Legs" />
+        <button id="btn-start">Start</button>
+      </div>
+
+      <div id="header-labels" class="hidden">
+        <div class="title">First to <span id="title-sets"></span></div>
+        <div class="sets-label">Sets</div>
+        <div class="legs-label">Legs</div>
+        <div class="throw-icons">
+          <span class="dart">🎯</span>
+          <span class="dart">🎯</span>
+          <span class="dart">🎯</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="player-row" id="player1">
+        <div class="name" contenteditable="true">Player 1<img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/1920px-Flag_of_Germany.svg.png" alt="germany">
+        </div>
+        <div class="sets" id="sets1">0</div>
+        <div class="legs" id="legs1">0</div>
+        <div class="points" id="points1">501</div>
+      </div>
+      <div class="player-row" id="player2">
+        <div class="name" contenteditable="true">Player 2<img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/1920px-Flag_of_Germany.svg.png" alt="germany">
+        </div>
+        <div class="sets" id="sets2">0</div>
+        <div class="legs" id="legs2">0</div>
+        <div class="points" id="points2">501</div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="left">Wenns nicht geht, ist eh Maxi schuld</div>
+      <div class="right">
+        <!-- sky logo -->
+      </div>
+    </div>
+  </div>
+
+  <div id="input-panel">
+    <div id="number-buttons">
+      <button class="number" data-num="1">1</button>
+      <button class="number" data-num="2">2</button>
+      <button class="number" data-num="3">3</button>
+      <button class="number" data-num="4">4</button>
+      <button class="number" data-num="5">5</button>
+      <button class="number" data-num="6">6</button>
+      <button class="number" data-num="7">7</button>
+      <button class="number" data-num="8">8</button>
+      <button class="number" data-num="9">9</button>
+      <button class="number" data-num="10">10</button>
+      <button class="number" data-num="11">11</button>
+      <button class="number" data-num="12">12</button>
+      <button class="number" data-num="13">13</button>
+      <button class="number" data-num="14">14</button>
+      <button class="number" data-num="15">15</button>
+      <button class="number" data-num="16">16</button>
+      <button class="number" data-num="17">17</button>
+      <button class="number" data-num="18">18</button>
+      <button class="number" data-num="19">19</button>
+      <button class="number" data-num="20">20</button>
+      <button class="number" data-num="25">25</button>
+    </div>
+    <div id="control-buttons">
+      <button class="control" id="btn-0">0</button>
+      <button class="control" id="btn-double" data-mod="2">Double</button>
+      <button class="control" id="btn-triple" data-mod="3">Triple</button>
+      <button class="control" id="btn-undo">←</button>
+    </div>
+  </div>
+
+  <script src="../js/input.js"></script>
+  <script src="../js/overlay.js"></script>
+
+</body>
+</html>
