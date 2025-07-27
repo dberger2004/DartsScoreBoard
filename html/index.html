@@ -9,21 +9,25 @@
 
   <div id="overlay">
     <div class="header">
-      <div id="header-input">
+      <div id="header-inputs">
         <input id="inp-sets" type="number" min="1" placeholder="Sets" />
         <input id="inp-legs" type="number" min="1" placeholder="Legs" />
         <button id="btn-start">Start</button>
       </div>
 
       <div id="header-labels" class="hidden">
-        <div class="title">First to <span id="title-sets"></span></div>
-        <div class="sets-label">Sets</div>
-        <div class="legs-label">Legs</div>
-        <div class="throw-icons">
+        <span class="title">
+          First to <span id="title-sets"></span> Sets
+          <span class="divider">·</span>
+          <span id="title-legs"></span> Legs
+        </span>
+        <span class="sets-label">Sets</span>
+        <span class="legs-label">Legs</span>
+        <span class="throw-icons">
           <span class="dart">🎯</span>
           <span class="dart">🎯</span>
           <span class="dart">🎯</span>
-        </div>
+        </span>
       </div>
     </div>
 
@@ -46,7 +50,7 @@
       </div>
     </div>
     <div class="footer">
-      <div class="left">Wenns nicht geht, ist eh Maxi schuld</div>
+      <div class="left"></div>
       <div class="right">
         <!-- sky logo -->
       </div>
@@ -86,7 +90,6 @@
   </div>
 
   <script src="../js/input.js"></script>
-  <script src="../js/overlay.js"></script>
 
 </body>
 </html>

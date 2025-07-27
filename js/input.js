@@ -19,12 +19,16 @@ const elSets2 = document.getElementById("sets2");
 const btnDouble = document.getElementById("btn-double");
 const btnTriple = document.getElementById("btn-triple");
 const btnUndo = document.getElementById("btn-undo");
-const headerInputs = document.getElementById("header-input");
-const headerLabels = document.getElementById("header-label");
+const headerInputs = document.getElementById("header-inputs");
+const headerLabels = document.getElementById("header-labels");
 const inpSets = document.getElementById("inp-sets");
 const inpLegs = document.getElementById("inp-legs");
 const btnStart = document.getElementById("btn-start");
 const titleSetsSpan = document.getElementById("title-sets");
+const titleLegsSpan = document.getElementById("title-legs");
+
+headerLabels.classList.add("hidden");
+headerInputs.classList.remove("hidden");
 
 const throwDarts = (baseValue, mod = currentMod) => {
   history.push({
@@ -51,8 +55,11 @@ const throwDarts = (baseValue, mod = currentMod) => {
   }
 
   // check, ob man überworfen hat
-  if (next < 0 || next === 1) {
+  if (next <= 0 || next === 1) {
     scores[currentPlayer] = prev;
+    currentMod = 1;
+    btnDouble.classList.remove("active");
+    btnTriple.classList.remove("active"); 
     changePlayer();
     updateUI();
     return;
@@ -99,6 +106,7 @@ const undo = () => {
   sets = last.sets;
   currentMod = last.currentMod;
   updateUI();
+  updateThrowIcons();
 }
 
 const updateUI = () => {
@@ -150,6 +158,7 @@ btnStart.addEventListener("click", () => {
   setsToPlay = parseInt(inpSets.value, 10) || 0;
   legsToPlay = parseInt(inpLegs.value, 10) || 0;
   titleSetsSpan.textContent = setsToPlay;
+  titleLegsSpan.textContent = legsToPlay;
   headerInputs.classList.add("hidden");
   headerLabels.classList.remove("hidden");
   updateUI();
