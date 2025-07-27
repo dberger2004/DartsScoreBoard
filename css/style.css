@@ -32,6 +32,19 @@ body {background: transparent; overflow: hidden; font-family: sans-serif; }
   cursor: pointer;
 }
 
+#header-inputs .btn-input {
+  background: #444;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+#btn-player1.active,
+#btn-player2.active { 
+  background-color: #58F754;
+}
+
 #header-labels {
   display: flex;
   align-items: center;

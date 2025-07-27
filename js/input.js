@@ -7,6 +7,7 @@ let currentMod = 1;
 const history = [];
 let setsToPlay = 0;
 let legsToPlay = 0;
+let startingPlayer = 0;
 
 const numButtons = document.querySelectorAll("#number-buttons .number");
 const btn0 = document.getElementById("btn-0");
@@ -26,6 +27,8 @@ const inpLegs = document.getElementById("inp-legs");
 const btnStart = document.getElementById("btn-start");
 const titleSetsSpan = document.getElementById("title-sets");
 const titleLegsSpan = document.getElementById("title-legs");
+const btnPlayer1 = document.getElementById("btn-player1");
+const btnPlayer2 = document.getElementById("btn-player2");
 
 headerLabels.classList.add("hidden");
 headerInputs.classList.remove("hidden");
@@ -50,8 +53,21 @@ const throwDarts = (baseValue, mod = currentMod) => {
   //  check für Doppelfinish
   if (next === 0 && mod === 2) {
     legs[currentPlayer]++;
-    resetLeg();
-    return;
+    btnDouble.classList.remove("active");
+    btnTriple.classList.remove("active");
+    if (legs[currentPlayer] === legsToPlay) {
+      sets[currentPlayer]++;
+      if (sets[currentPlayer] === setsToPlay) {
+        alert(`Spieler ${currentPlayer + 1} hat gewonnen!`);
+        resetGame();
+      } else {
+        resetSet();
+        return;
+      }
+    } else {
+      resetLeg();
+      return;
+    }
   }
 
   // check, ob man überworfen hat
@@ -92,6 +108,8 @@ const changePlayer = () => {
 const resetLeg = () => {
   scores = [501, 501];
   throwsCount = 0;
+  currentPlayer = startingPlayer;
+  startingPlayer = 1 - startingPlayer;
   updateUI();
   updateThrowIcons();
 }
@@ -123,6 +141,30 @@ const updateThrowIcons = () => {
   icons.forEach((icon, i) => {
     icon.classList.toggle("used", i < throwsCount);
   });
+}
+
+const resetGame = () => { 
+  currentPlayer = 0;
+  throwsCount = 0;
+  scores = [501, 501];
+  legs = [0, 0];
+  sets = [0, 0];
+  currentMod = 1;
+  history.length = 0;
+  
+  headerInputs.classList.remove("hidden");
+  headerLabels.classList.add("hidden");
+
+  inpSets.value = "";
+  inpLegs.value = "";
+
+  updateUI();
+  updateThrowIcons();
+}
+
+const resetSet = () => { 
+  legs = [0, 0];
+  resetLeg();
 }
 
 [...numButtons, btn0].forEach(btn => {
@@ -161,7 +203,24 @@ btnStart.addEventListener("click", () => {
   titleLegsSpan.textContent = legsToPlay;
   headerInputs.classList.add("hidden");
   headerLabels.classList.remove("hidden");
+  currentPlayer = startingPlayer;
   updateUI();
+});
+
+btnPlayer1.addEventListener('click', () => { 
+  const isActive = btnPlayer1.classList.toggle('active');
+  if (isActive) {
+    startingPlayer = 0;
+    btnPlayer2.classList.remove('active');
+  }
+});
+
+btnPlayer2.addEventListener('click', () => { 
+  const isActive = btnPlayer2.classList.toggle('active');
+  if (isActive) {
+    startingPlayer = 1;
+    btnPlayer1.classList.remove('active');
+  }
 });
 
 updateUI();
