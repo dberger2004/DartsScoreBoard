@@ -1,35 +1,73 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {background: transparent; overflow: hidden; font-family: sans-serif; }
+body {
+  background: transparent;
+  overflow: hidden;
+  font-family: sans-serif;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
 
 .hidden {
   display: none !important;
 }
 
 #overlay {
-  width: 640px;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
   font-family: Arial, sans-serif;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#overlay .body {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-#header-inputs {
+.header {
+  padding: 20px;
+  background: rgba(20, 20, 20, 0.9);
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-#header-inputs input {
-  width: 60px;
-  margin-right: 8px;
-  padding: 4px;
-  font-size: 0.9rem;
+#setup-panel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
 }
 
+#header-inputs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 20px;
+  background: rgba(20, 20, 20, 0.9);
+  border-radius: 8px;
+}
+
+#header-inputs input,
 #header-inputs button {
-  padding: 4px 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 8px;
+  width: 80px;
+  text-align: center;
+}
+
+#header-inputs input::placeholder {
+  color: #888;
 }
 
 #header-inputs .btn-input {
@@ -38,16 +76,18 @@ body {background: transparent; overflow: hidden; font-family: sans-serif; }
   border: none;
   padding: 4px 8px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 #btn-player1.active,
 #btn-player2.active { 
-  background-color: #58F754;
+  background-color: #5f5f5f;
 }
 
 #header-labels {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 #header-labels .title {
@@ -58,6 +98,7 @@ body {background: transparent; overflow: hidden; font-family: sans-serif; }
   display: flex;
   align-items: center;
   gap: 8px;
+  padding-left: 8px;
 }
 
 .title #title-sets,
@@ -77,7 +118,6 @@ body {background: transparent; overflow: hidden; font-family: sans-serif; }
   text-transform: uppercase;
   text-align: center;
   font-size: 1rem;
-  margin-right: 5px;
 }
 
 #header-labels .legs-label {
@@ -85,14 +125,14 @@ body {background: transparent; overflow: hidden; font-family: sans-serif; }
   text-transform: uppercase;
   text-align: center;
   font-size: 1rem;
-  margin-right: 20px;
 }
 
 #header-labels .throw-icons {
-  flex: 0;
-  margin-left: auto;
-  text-align: right;
-  font-size: 1rem;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding-right: 10px;
 }
 
 .body {
@@ -164,7 +204,9 @@ body {background: transparent; overflow: hidden; font-family: sans-serif; }
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 640px;
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 #modifier-buttons,

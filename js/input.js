@@ -29,9 +29,14 @@ const titleSetsSpan = document.getElementById("title-sets");
 const titleLegsSpan = document.getElementById("title-legs");
 const btnPlayer1 = document.getElementById("btn-player1");
 const btnPlayer2 = document.getElementById("btn-player2");
+const overlay = document.getElementById("overlay");
+const inputPanel = document.getElementById("input-panel");
+const setupPanel = document.getElementById("setup-panel");
 
-headerLabels.classList.add("hidden");
-headerInputs.classList.remove("hidden");
+
+overlay.classList.add("hidden");
+setupPanel.classList.remove("hidden");
+inputPanel.classList.add("hidden");
 
 const throwDarts = (baseValue, mod = currentMod) => {
   history.push({
@@ -85,7 +90,7 @@ const throwDarts = (baseValue, mod = currentMod) => {
   scores[currentPlayer] = next;
   throwsCount++;
 
-  // Spielerwechsel nach 3 würfen
+  // Spielerwechsel nach 3 Würfen
   if (throwsCount >= 3) {
     changePlayer();
   }
@@ -151,12 +156,13 @@ const resetGame = () => {
   sets = [0, 0];
   currentMod = 1;
   history.length = 0;
-  
-  headerInputs.classList.remove("hidden");
-  headerLabels.classList.add("hidden");
 
   inpSets.value = "";
   inpLegs.value = "";
+
+  setupPanel.classList.remove("hidden");
+  inputPanel.classList.add("hidden");
+  overlay.classList.remove("hidden");
 
   updateUI();
   updateThrowIcons();
@@ -201,9 +207,11 @@ btnStart.addEventListener("click", () => {
   legsToPlay = parseInt(inpLegs.value, 10) || 0;
   titleSetsSpan.textContent = setsToPlay;
   titleLegsSpan.textContent = legsToPlay;
-  headerInputs.classList.add("hidden");
   headerLabels.classList.remove("hidden");
   currentPlayer = startingPlayer;
+  setupPanel.classList.add("hidden");
+  overlay.classList.remove("hidden");
+  inputPanel.classList.remove("hidden");
   updateUI();
 });
 
