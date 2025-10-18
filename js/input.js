@@ -20,7 +20,6 @@ const elSets2 = document.getElementById("sets2");
 const btnDouble = document.getElementById("btn-double");
 const btnTriple = document.getElementById("btn-triple");
 const btnUndo = document.getElementById("btn-undo");
-const headerInputs = document.getElementById("header-inputs");
 const headerLabels = document.getElementById("header-labels");
 const inpSets = document.getElementById("inp-sets");
 const inpLegs = document.getElementById("inp-legs");
@@ -32,11 +31,24 @@ const btnPlayer2 = document.getElementById("btn-player2");
 const overlay = document.getElementById("overlay");
 const inputPanel = document.getElementById("input-panel");
 const setupPanel = document.getElementById("setup-panel");
+const customAlert = document.getElementById("custom-alert");
+const customAlertMessage = document.getElementById("custom-alert-message");
+const customAlertBtn = document.getElementById("custom-alert-btn");
 
 
 overlay.classList.add("hidden");
 setupPanel.classList.remove("hidden");
 inputPanel.classList.add("hidden");
+
+
+const showCustomAlert = (message) => {
+  customAlertMessage.textContent = message;
+  customAlert.classList.remove("hidden");
+}
+
+customAlertBtn.addEventListener("click", () => {
+  customAlert.classList.add("hidden");
+});
 
 const throwDarts = (baseValue, mod = currentMod) => {
   history.push({
@@ -63,7 +75,7 @@ const throwDarts = (baseValue, mod = currentMod) => {
     if (legs[currentPlayer] === legsToPlay) {
       sets[currentPlayer]++;
       if (sets[currentPlayer] === setsToPlay) {
-        alert(`Spieler ${currentPlayer + 1} hat gewonnen!`);
+        showCustomAlert(`Spieler ${currentPlayer + 1} gewinnt das Spiel!`);
         resetGame();
       } else {
         resetSet();
@@ -203,6 +215,10 @@ btnTriple.addEventListener("click", () => {
 btnUndo.addEventListener("click", undo);
 
 btnStart.addEventListener("click", () => {
+  if (inpLegs.value < 1 || inpSets.value < 1) {
+    showCustomAlert("Bitte gültige Anzahl an Sätzen und Legs eingeben.");
+    return;
+  }
   setsToPlay = parseInt(inpSets.value, 10) || 0;
   legsToPlay = parseInt(inpLegs.value, 10) || 0;
   titleSetsSpan.textContent = setsToPlay;
