@@ -311,7 +311,7 @@ body {
   line-height: 1.5;
 }
 
-#custom-alert-close {
+#custom-alert-btn {
   background: #444;
   color: #fff;
   border: none;
@@ -321,6 +321,6 @@ body {
   font-size: 1rem;
 }
 
-#custom-alert-close:hover {
+#custom-alert-btn:hover {
   background: #555;
 }

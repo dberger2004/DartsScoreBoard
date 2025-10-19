@@ -8,6 +8,7 @@ const history = [];
 let setsToPlay = 0;
 let legsToPlay = 0;
 let startingPlayer = 0;
+let onAlertClose = null;
 
 const numButtons = document.querySelectorAll("#number-buttons .number");
 const btn0 = document.getElementById("btn-0");
@@ -41,13 +42,18 @@ setupPanel.classList.remove("hidden");
 inputPanel.classList.add("hidden");
 
 
-const showCustomAlert = (message) => {
+const showCustomAlert = (message, callback) => {
   customAlertMessage.textContent = message;
   customAlert.classList.remove("hidden");
+  onAlertClose = callback || null;
 }
 
 customAlertBtn.addEventListener("click", () => {
   customAlert.classList.add("hidden");
+  if (typeof onAlertClose === "function") {
+    onAlertClose();
+    onAlertClose = null;
+  }
 });
 
 const throwDarts = (baseValue, mod = currentMod) => {
@@ -74,9 +80,9 @@ const throwDarts = (baseValue, mod = currentMod) => {
     btnTriple.classList.remove("active");
     if (legs[currentPlayer] === legsToPlay) {
       sets[currentPlayer]++;
+      updateUI();
       if (sets[currentPlayer] === setsToPlay) {
-        showCustomAlert(`Spieler ${currentPlayer + 1} gewinnt das Spiel!`);
-        resetGame();
+        showCustomAlert(`Spieler ${currentPlayer + 1} gewinnt das Spiel!`, resetGame);
       } else {
         resetSet();
         return;
@@ -162,6 +168,7 @@ const updateThrowIcons = () => {
 
 const resetGame = () => { 
   currentPlayer = 0;
+  startingPlayer = 0;
   throwsCount = 0;
   scores = [501, 501];
   legs = [0, 0];
@@ -169,15 +176,18 @@ const resetGame = () => {
   currentMod = 1;
   history.length = 0;
 
-  inpSets.value = "";
-  inpLegs.value = "";
-
-  setupPanel.classList.remove("hidden");
-  inputPanel.classList.add("hidden");
-  overlay.classList.remove("hidden");
-
   updateUI();
   updateThrowIcons();
+
+  inpSets.value = "";
+  inpLegs.value = "";
+  btnPlayer1.classList.remove('active');
+  btnPlayer2.classList.remove('active');
+
+  overlay.classList.add("hidden");
+  inputPanel.classList.add("hidden");
+  headerLabels.classList.add("hidden");
+  setupPanel.classList.remove("hidden");
 }
 
 const resetSet = () => { 
